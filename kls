@@ -1,0 +1,38 @@
+#! /usr/bin/env python3
+
+import argparse
+import os
+
+SCRIPT_DESC = "gTile keyboard layout switcher"
+LAYOUTS = ["normal", "mac"]
+LAYOUT_HELP = "The layout you want to use"
+
+
+def main():
+
+    # Creating arguments parser ---------------------------------
+    parser = argparse.ArgumentParser(description=SCRIPT_DESC)
+    parser.add_argument("layout", choices=LAYOUTS, help=LAYOUT_HELP)
+
+    args = parser.parse_args()
+
+    # Executing commands for given layout -----------------------
+    layout = args.layout
+    CMD_MAC = '''gsettings set org.gnome.desktop.input-sources xkb-options "['altwin:ctrl_alt_win']"'''
+    CMD_NORMAL = '''gsettings set org.gnome.desktop.input-sources xkb-options "@as []"'''
+
+    if layout == "normal" :
+        executeCommand(CMD_NORMAL)
+
+
+    if layout == "mac" :
+        executeCommand(CMD_MAC)
+
+
+def executeCommand(command):
+
+    os.system(command)
+
+
+if __name__ == '__main__':
+    main()
