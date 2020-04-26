@@ -20,14 +20,22 @@ def main():
     layout = args.layout
     CMD_MAC = '''gsettings set org.gnome.desktop.input-sources xkb-options "['altwin:ctrl_alt_win']"'''
     CMD_NORMAL = '''gsettings set org.gnome.desktop.input-sources xkb-options "@as []"'''
-
+    
+    CMD_SWITCH_WIN_CTRL = '''gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Primary>Tab']"'''
+    CMD_SWITCH_WIN_CTRL_BACK = '''gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Primary><Shift>Tab']"'''
+    
+    CMD_SWITCH_WIN_ALT =  '''gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"'''
+    CMD_SWITCH_WIN_ALT_BACK = '''gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"'''
+    
     if layout == "normal" :
         executeCommand(CMD_NORMAL)
-
+        executeCommand(CMD_SWITCH_WIN_ALT)
+        executeCommand(CMD_SWITCH_WIN_ALT_BACK)
 
     if layout == "mac" :
         executeCommand(CMD_MAC)
-
+        executeCommand(CMD_SWITCH_WIN_CTRL)
+        executeCommand(CMD_SWITCH_WIN_CTRL_BACK)
 
 def executeCommand(command):
 
